@@ -17,7 +17,7 @@ def show_main_page(request):
             'properties': {
                 'title': place.title,
                 'placeId': place.pk,
-                'detailsUrl': ''
+                'detailsUrl': f'/places/{place.pk}'
             }
         }
         for place in Place.objects.all()
