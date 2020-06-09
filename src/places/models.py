@@ -19,5 +19,8 @@ class PlaceImage(models.Model):
     sort_order = models.PositiveIntegerField('Позиция', default=0, blank=False, null=False)
     place = models.ForeignKey('Place', on_delete=models.CASCADE, related_name='images')
 
+    class Meta(object):
+        ordering = ['sort_order']
+
     def __str__(self):
         return f'{self.sort_order} {self.place}'
