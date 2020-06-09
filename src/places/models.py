@@ -2,9 +2,9 @@ from django.db import models
 
 
 class Place(models.Model):
-    title = models.CharField('Название', max_length=200)
-    description_short = models.TextField('Краткое описание', max_length=200)
-    description_long = models.TextField('Подробное описание')
+    title = models.CharField('Название', max_length=200, null=False, blank=False)
+    description_short = models.TextField('Краткое описание', max_length=200, null=False, blank=False)
+    description_long = models.TextField('Подробное описание', null=True, blank=True)
     longitude = models.FloatField('Широта')
     latitude = models.FloatField('Долгота')
 
@@ -16,7 +16,7 @@ class PlaceImage(models.Model):
     verbose_name = 'Фотография'
     verbose_name_plural = 'Фотографии'
     image = models.ImageField('Картинка')
-    sort_order = models.IntegerField('Позиция')
+    sort_order = models.PositiveIntegerField('Позиция', default=0, blank=False, null=False)
     place = models.ForeignKey('Place', on_delete=models.CASCADE, related_name='images')
 
     def __str__(self):
