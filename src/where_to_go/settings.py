@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,12 +25,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'sx*^nh@ykrxxbq)3ob%s*fjz18=e$*ct!raq61bk6&y47wt9l#'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS')
 
 
 # Application definition
@@ -71,8 +76,10 @@ TEMPLATES = [
 ]
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'files', 'static'),
+    os.path.join(BASE_DIR, os.getenv('STATIC_ROOT')),
 ]
+STATIC_URL = os.getenv('STATIC_URL')
+
 
 WSGI_APPLICATION = 'where_to_go.wsgi.application'
 
@@ -82,8 +89,12 @@ WSGI_APPLICATION = 'where_to_go.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': os.getenv('DATABASE_ENGINE'),
+        'NAME': os.getenv(BASE_DIR, os.environ.get('DATABASE_NAME')),
+        'HOST': os.getenv('DATABASE_HOST'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+        'USER': os.getenv('DATABASE_USER'),
+        'PORT': os.getenv('DATABASE_PORT'),
     }
 }
 
@@ -124,7 +135,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'files', 'media')
-MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, os.getenv('MEDIA_ROOT'))
+MEDIA_URL = os.getenv('MEDIA_URL')
