@@ -1,7 +1,5 @@
-import json
-
-from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, render
 
 from places.models import Place
 
@@ -12,13 +10,13 @@ def show_main_page(request):
             'type': 'Feature',
             'geometry': {
                 'type': 'Point',
-                'coordinates': [place.longitude, place.latitude]
+                'coordinates': [place.longitude, place.latitude],
             },
             'properties': {
                 'title': place.title,
                 'placeId': place.pk,
-                'detailsUrl': f'/places/{place.pk}'
-            }
+                'detailsUrl': f'/places/{place.pk}',
+            },
         }
         for place in Place.objects.all()
     ]
@@ -37,9 +35,8 @@ def place_detailed_view(request, place_id):
         description_long=place.description_long,
         coordinates=dict(
             lng=place.longitude,
-            lat=place.latitude
-        )
+            lat=place.latitude,
+        ),
     )
 
-    # return JsonResponse(data)
     return JsonResponse(data, json_dumps_params={'indent': 2, 'ensure_ascii': False})
