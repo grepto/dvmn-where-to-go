@@ -16,7 +16,7 @@ class PlaceImageInline(SortableInlineAdminMixin, admin.TabularInline):
     def preview_image(self, obj):
         return format_html('<img src="{url}" height={height}/>'.format(
             url=obj.image.url,
-            height=obj.image.height if obj.image.height <= 200 else 200), )
+            height=obj.image.height if obj.image.height <= 200 else 200))
 
 
 @admin.register(Place)
