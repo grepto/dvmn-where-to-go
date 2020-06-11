@@ -73,9 +73,10 @@ TEMPLATES = [
 ]
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, os.getenv('STATIC_ROOT')),
+    os.path.join(BASE_DIR, 'assets'),
 ]
 STATIC_URL = os.getenv('STATIC_URL')
+STATIC_ROOT = os.getenv('STATIC_ROOT')
 
 WSGI_APPLICATION = 'where_to_go.wsgi.application'
 
