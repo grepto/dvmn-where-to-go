@@ -6,7 +6,7 @@ deps:  ## Install dependencies
 
 lint:  ## Lint and static-check
 	flake8 src
-	pylint srch
+	pylint src
 
 help: ## Show help message
 	@IFS=$$'\n' ; \
