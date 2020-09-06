@@ -33,6 +33,8 @@ class Command(BaseCommand):
 
         for sort_order, url in enumerate(place_content['imgs']):
             response = requests.get(url)
+            response.raise_for_status()
+
             image_content = (ContentFile(response.content))
             place_image = place.images.create(sort_order=sort_order)
             place_image.image.save(name=Path(url).name, content=image_content, save=True)
