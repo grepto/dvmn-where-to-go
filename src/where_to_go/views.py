@@ -31,8 +31,8 @@ def place_detailed_view(request, place_id):
     data = dict(
         title=place.title,
         imgs=[img.image.url for img in place.images.all()],
-        description_short=place.description_short,
-        description_long=place.description_long,
+        short_description=place.short_description,
+        long_description=place.long_description,
         coordinates=dict(
             lng=place.longitude,
             lat=place.latitude,
