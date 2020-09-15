@@ -12,9 +12,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
-from dotenv import load_dotenv
+from environs import Env
 
-load_dotenv()
+env = Env()
+env.read_env()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,12 +24,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG')
+DEBUG = env.bool('DEBUG', default=False)
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS')
+ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 
 # Application definition
 
@@ -75,8 +76,8 @@ TEMPLATES = [
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'assets'),
 ]
-STATIC_URL = os.getenv('STATIC_URL')
-STATIC_ROOT = os.getenv('STATIC_ROOT')
+STATIC_URL = env('STATIC_URL')
+STATIC_ROOT = env('STATIC_ROOT')
 
 WSGI_APPLICATION = 'where_to_go.wsgi.application'
 
@@ -85,12 +86,12 @@ WSGI_APPLICATION = 'where_to_go.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv('DATABASE_ENGINE'),
-        'NAME': os.getenv(BASE_DIR, os.environ.get('DATABASE_NAME')),
-        'HOST': os.getenv('DATABASE_HOST'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
-        'USER': os.getenv('DATABASE_USER'),
-        'PORT': os.getenv('DATABASE_PORT'),
+        'ENGINE': env('DATABASE_ENGINE'),
+        'NAME': env(BASE_DIR, os.environ.get('DATABASE_NAME')),
+        'HOST': env('DATABASE_HOST', default=''),
+        'PASSWORD': env('DATABASE_PASSWORD', default=''),
+        'USER': env('DATABASE_USER', default=''),
+        'PORT': env('DATABASE_PORT', default=''),
     },
 }
 
@@ -129,5 +130,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 
-MEDIA_ROOT = os.path.join(BASE_DIR, os.getenv('MEDIA_ROOT'))
-MEDIA_URL = os.getenv('MEDIA_URL')
+MEDIA_ROOT = os.path.join(BASE_DIR, env('MEDIA_ROOT'))
+MEDIA_URL = env('MEDIA_URL')

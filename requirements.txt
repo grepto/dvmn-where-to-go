@@ -2,5 +2,5 @@ Django>=3.0.7,<3.1
 django-admin-sortable2>=0.7.6,<0.8
 django-tinymce>=3.0.2,<3.1
 Pillow>=7.1.2,<7.2
-python-dotenv>=0.13.0,<0.14
 requests>=2.23.0,<2.24
+environs>=8.0.0,<8.1
