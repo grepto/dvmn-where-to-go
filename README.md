@@ -40,8 +40,8 @@ python3 manage.py createsuperuser
 ## Как проверить что все хорошо
 Запустите в терминале команды
 ```
-flake8 /src
-pylint /src
+flake8 src
+pylint src
 ``` 
 Изучите вывод в консоли.
 
