@@ -22,22 +22,25 @@ def show_main_page(request):
         for place in Place.objects.all()
     ]
 
-    places_geojson = dict(type='FeatureCollection', features=features)
-    data = dict(places_geojson=places_geojson)
+    places_geojson = {
+        'type': 'FeatureCollection',
+        'features': features
+    }
+    data = {'places_geojson': places_geojson}
     return render(request, 'index.html', context=data)
 
 
 def place_detailed_view(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
-    data = dict(
-        title=place.title,
-        imgs=[img.image.url for img in place.images.all()],
-        short_description=place.short_description,
-        long_description=place.long_description,
-        coordinates=dict(
-            lng=place.longitude,
-            lat=place.latitude,
-        ),
-    )
+    data = {
+        'title': place.title,
+        'imgs': [img.image.url for img in place.images.all()],
+        'short_description': place.short_description,
+        'long_description': place.long_description,
+        'coordinates': {
+            'lng': place.longitude,
+            'lat': place.latitude,
+        },
+    }
 
     return JsonResponse(data, json_dumps_params={'indent': 2, 'ensure_ascii': False})
