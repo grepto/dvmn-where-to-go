@@ -29,7 +29,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG', default=False)
 
-ALLOWED_HOSTS = env('ALLOWED_HOSTS')
+ALLOWED_HOSTS = env('ALLOWED_HOSTS', default=['*'])
 
 # Application definition
 
@@ -76,8 +76,8 @@ TEMPLATES = [
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'assets'),
 ]
-STATIC_URL = env('STATIC_URL')
-STATIC_ROOT = env('STATIC_ROOT')
+STATIC_URL = env('STATIC_URL', default='/static/')
+STATIC_ROOT = env('STATIC_ROOT', default='static')
 
 WSGI_APPLICATION = 'where_to_go.wsgi.application'
 
@@ -86,8 +86,8 @@ WSGI_APPLICATION = 'where_to_go.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': env('DATABASE_ENGINE'),
-        'NAME': env(BASE_DIR, os.environ.get('DATABASE_NAME')),
+        'ENGINE': env('DATABASE_ENGINE', default='django.db.backends.sqlite3'),
+        'NAME': env('DATABASE_NAME', default='db.sqlite3'),
         'HOST': env('DATABASE_HOST', default=''),
         'PASSWORD': env('DATABASE_PASSWORD', default=''),
         'USER': env('DATABASE_USER', default=''),
@@ -116,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 
@@ -130,5 +130,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 
-MEDIA_ROOT = os.path.join(BASE_DIR, env('MEDIA_ROOT'))
-MEDIA_URL = env('MEDIA_URL')
+MEDIA_ROOT = os.path.join(BASE_DIR, env('MEDIA_ROOT', default='media'))
+MEDIA_URL = env('MEDIA_URL', default='/media/')
