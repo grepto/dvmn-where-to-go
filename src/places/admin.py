@@ -12,6 +12,9 @@ class PlaceImageInline(SortableInlineAdminMixin, admin.TabularInline):
     readonly_fields = ['preview_image']
 
     def preview_image(self, obj):
+        if not obj.image:
+            return format_html('<p>{}</p>', 'Фотография не загружена')
+
         return format_html('<img src="{url}" height={height}/>',
                            url=obj.image.url,
                            height=min(obj.image.height, 200),
