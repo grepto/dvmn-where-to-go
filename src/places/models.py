@@ -17,7 +17,7 @@ class Place(models.Model):
 class PlaceImage(models.Model):
     """The model for photo for the place"""
 
-    image = models.ImageField('Картинка')
+    image = models.ImageField('Фотография')
     sort_order = models.PositiveIntegerField('Позиция', default=0)
     place = models.ForeignKey('Place', on_delete=models.CASCADE, related_name='images', verbose_name='Место')
 
