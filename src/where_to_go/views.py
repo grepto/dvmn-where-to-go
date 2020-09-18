@@ -24,7 +24,7 @@ def show_main_page(request):
 
     places_geojson = {
         'type': 'FeatureCollection',
-        'features': features
+        'features': features,
     }
     data = {'places_geojson': places_geojson}
     return render(request, 'index.html', context=data)
